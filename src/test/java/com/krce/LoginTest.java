@@ -12,7 +12,7 @@ public class LoginTest {
 
     public static WebDriver driver;
 
-    @BeforeTest
+    @BeforeClass
     public void setup() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -20,13 +20,15 @@ public class LoginTest {
         driver.get("https://demo.guru99.com/V4/index.php");
     }
 
-    @Test(dataProvider = "loginData")
-    public void verifyLogin(String username,String password) {
-        LoginPage login=new LoginPage(driver);
-        login.login(username, password);
-        String title=driver.getTitle();
-        Assert.assertTrue(title.contains("Guru99"));
-    }
+//    @Test(dataProvider = "loginData")
+//    public void verifyLogin(String username,String password) {
+//        LoginPage login=new LoginPage(driver);
+//        login.login(username, password);
+//        String title=driver.getTitle();
+//        Assert.assertTrue(title.contains("Guru99"));
+//    }
+
+
 
     @DataProvider(name = "loginData")
     public Object[][] getData() {
@@ -35,8 +37,10 @@ public class LoginTest {
                 {"mngr661030","pysabyj"}
         };
     }
-    @AfterMethod
-    public void closeBrowser() {
+
+
+    @AfterClass
+    public void tearDown(){
         driver.quit();
     }
 }

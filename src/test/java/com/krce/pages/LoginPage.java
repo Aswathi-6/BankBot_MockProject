@@ -8,10 +8,11 @@ public class LoginPage {
         this.driver = driver;
     }
 
+   //USERNAME
     By userName=By.name("uid");
-
+    //PASSWORD
     By password=By.name("password");
-
+     //BUTTON
     By loginButton=By.name("btnLogin");
 
     public void enterUserName(String uname) {
@@ -19,12 +20,10 @@ public class LoginPage {
     }
 
     public void enterPassword(String pwd) {
-
         driver.findElement(password).sendKeys(pwd);
     }
 
     public void clickLogin() {
-
         driver.findElement(loginButton).click();
     }
 

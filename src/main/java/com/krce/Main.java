@@ -7,9 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-//        WebDriver driver=new ChromeDriver();
-//        driver.get("https://demo.guru99.com/V4/index.php");
-//        driver.findElement(B)
+//
 
         }
     }
