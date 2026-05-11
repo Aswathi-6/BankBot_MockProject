@@ -1,5 +1,6 @@
 package com.krce;
 
+import com.krce.pages.LoginPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
