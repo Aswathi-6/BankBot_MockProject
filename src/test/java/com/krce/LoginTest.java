@@ -20,13 +20,13 @@ public class LoginTest {
         driver.get("https://demo.guru99.com/V4/index.php");
     }
 
-//    @Test(dataProvider = "loginData")
-//    public void verifyLogin(String username,String password) {
-//        LoginPage login=new LoginPage(driver);
-//        login.login(username, password);
-//        String title=driver.getTitle();
-//        Assert.assertTrue(title.contains("Guru99"));
-//    }
+    @Test(dataProvider = "loginData")
+    public void verifyLogin(String username,String password) {
+        LoginPage login=new LoginPage(driver);
+        login.login(username, password);
+        String title=driver.getTitle();
+        Assert.assertTrue(title.contains("Guru99"));
+    }
 
 
 

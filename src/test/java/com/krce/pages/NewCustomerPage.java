@@ -4,13 +4,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class NewCustomerPage {
-    WebDriver driver;
-    public NewCustomerPage(WebDriver driver){
-        this.driver=driver;
 
+    WebDriver driver;
+
+    public NewCustomerPage(WebDriver driver) {
+        this.driver=driver;
     }
 
+    By newCustomer=By.linkText("New Customer");
     By customerName=By.name("name");
+    By gender=By.xpath("//input[@value='f']");
     By dateofBirth=By.name("dob");
     By address=By.name("addr");
     By city=By.name("city");
@@ -19,63 +22,56 @@ public class NewCustomerPage {
     By mobileno=By.name("telephoneno");
     By emailID=By.name("emailid");
     By password=By.name("password");
-    By loginButton=By.name("sub");
-    //By resetButton=By.name("res");
+    By submitButton=By.name("sub");
 
-    public void entercustomerName(String name) {
-        driver.findElement(customerName).sendKeys("Aswathi");
+    public void enterCustomerName(String name) {
+        driver.findElement(customerName).sendKeys(name);
+    }
+
+    public void selectGender() {
+        driver.findElement(gender).click();
     }
 
     public void enterDateofBirth(String dob) {
-        driver.findElement(dateofBirth).sendKeys("24-06-2005");
+        driver.findElement(dateofBirth).sendKeys(dob);
     }
 
     public void enterAddress(String addr) {
-        driver.findElement(address).sendKeys("249KamarajNagarThirumandurai");
+        driver.findElement(address).sendKeys(addr);
     }
-
     public void enterCity(String cityname) {
-        driver.findElement(city).sendKeys("Perambalur");
+        driver.findElement(city).sendKeys(cityname);
     }
-
     public void enterState(String statename) {
-        driver.findElement(state).sendKeys("TamilNadu");
+        driver.findElement(state).sendKeys(statename);
     }
-
     public void enterPin(String pinname) {
-        driver.findElement(pin).sendKeys("621108");
+        driver.findElement(pin).sendKeys(pinname);
     }
-
-    public void enterMobile(String name) {
-        driver.findElement(mobileno).sendKeys("6381905243");
+    public void enterMobile(String mobile) {
+        driver.findElement(mobileno).sendKeys(mobile);
     }
-
-    public void enterEmail(String ename) {
-        driver.findElement(emailID).sendKeys("aswathimurugesan2406@gmail.com");
+    public void enterEmail(String email) {
+        driver.findElement(emailID).sendKeys(email);
     }
-
-    public void enterPswd(String pswd) {
-        driver.findElement(password).sendKeys("pysabyj");
+    public void enterPassword(String pswd) {
+        driver.findElement(password).sendKeys(pswd);
     }
-
-    public void clickLogin() {
-        driver.findElement(loginButton).submit();
+    public void clickSubmit() {
+        driver.findElement(submitButton).click();
     }
-
-//    public void clickReset() {
-//        driver.findElement(resetButton).click();
-//    }
-public void login(String uname,String pwd,String dob,String addr,String city,String state,String pin,String no,String email) {
-        entercustomerName(uname);
+    public void createCustomer(String name,String dob,String addr,String cityname,String statename,String pinname,String mobile,String email,String pswd) {
+        driver.findElement(newCustomer).click();
+        enterCustomerName(name);
+        selectGender();
         enterDateofBirth(dob);
         enterAddress(addr);
-        enterCity(city);
-        enterState(state);
-        enterPin(pin);
-        enterMobile(no);
+        enterCity(cityname);
+        enterState(statename);
+        enterPin(pinname);
+        enterMobile(mobile);
         enterEmail(email);
-        enterPswd(pwd);
-        clickLogin();
-}
-
+        enterPassword(pswd);
+        clickSubmit();
+    }
 }

@@ -4,17 +4,16 @@ import com.krce.pages.LoginPage;
 import com.krce.pages.NewCustomerPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-import static com.krce.LoginTest.driver;
+public class NewCustomerTest {
 
-public class NewCustomerTest extends LoginTest {
+    WebDriver driver;
+
     @BeforeClass
     public void setup() {
         driver = new ChromeDriver();
@@ -23,17 +22,35 @@ public class NewCustomerTest extends LoginTest {
         driver.get("https://demo.guru99.com/V4/index.php");
     }
 
-
     @Test
-    public void createLogin(String uname,String pwd,String dob,String addr,String city,String state,String pin,String no,String email){
-        NewCustomerPage login=new NewCustomerPage(driver);
-        login.login(uname,pwd,dob,addr,city,state,pin,no,email);
-            NewCustomerPage customer=new NewCustomerPage(driver);
-            customer.login(uname,pwd,dob,addr,city,state,pin,no,email);
+    public void createCustomerTest() {
+        LoginPage login = new LoginPage(driver);
+        login.login(
+                "mngr661030",
+                "pysabyj"
+        );
+
+        NewCustomerPage customer =
+                new NewCustomerPage(driver);
+
+        customer.createCustomer(
+                "Aswathi",
+                "24-06-2005",
+                "249 Kamaraj Nagar Thirumandurai",
+                "Perambalur",
+                "Tamil Nadu",
+                "621108",
+                "6381905243",
+                "aswathi"
+                        + System.currentTimeMillis()
+                        + "@gmail.com",
+                "pysabyj"
+        );
+        System.out.println("Customer Created Successfully");
     }
     @AfterClass
-    public void tearDown(){
+    public void tearDown() {
+
         driver.quit();
     }
-
 }
