@@ -8,70 +8,64 @@ public class NewCustomerPage {
     WebDriver driver;
 
     public NewCustomerPage(WebDriver driver) {
-        this.driver=driver;
+        this.driver = driver;
     }
 
-    By newCustomer=By.linkText("New Customer");
+    // New Customer Link
+    By newCustomerLink = By.linkText("New Customer");
+
+    // Customer Form Fields
     By customerName=By.name("name");
-    By gender=By.xpath("//input[@value='f']");
-    By dateofBirth=By.name("dob");
+    By genderMale=By.xpath("//input[@value='m']");
+    By dob=By.name("dob");
     By address=By.name("addr");
     By city=By.name("city");
     By state=By.name("state");
     By pin=By.name("pinno");
-    By mobileno=By.name("telephoneno");
-    By emailID=By.name("emailid");
+    By mobile=By.name("telephoneno");
+    By email=By.name("emailid");
     By password=By.name("password");
     By submitButton=By.name("sub");
+    By editCustomerLink=By.linkText("Edit Customer");
+    By customerId=By.name("cusid");
+    By submitEdit=By.name("AccSubmit");
+    By editAddress=By.name("addr");
 
-    public void enterCustomerName(String name) {
-        driver.findElement(customerName).sendKeys(name);
+    public void clickNewCustomer() {
+        driver.findElement(newCustomerLink).click();
     }
 
-    public void selectGender() {
-        driver.findElement(gender).click();
-    }
+    public void createCustomer(String cname,String date,String addr,String cityName,String stateName,String pinNo,String phone,String mail,String pass) {
 
-    public void enterDateofBirth(String dob) {
-        driver.findElement(dateofBirth).sendKeys(dob);
-    }
-
-    public void enterAddress(String addr) {
+        clickNewCustomer();
+        driver.findElement(customerName).sendKeys(cname);
+        driver.findElement(genderMale).click();
+        driver.findElement(dob).sendKeys(date);
         driver.findElement(address).sendKeys(addr);
-    }
-    public void enterCity(String cityname) {
-        driver.findElement(city).sendKeys(cityname);
-    }
-    public void enterState(String statename) {
-        driver.findElement(state).sendKeys(statename);
-    }
-    public void enterPin(String pinname) {
-        driver.findElement(pin).sendKeys(pinname);
-    }
-    public void enterMobile(String mobile) {
-        driver.findElement(mobileno).sendKeys(mobile);
-    }
-    public void enterEmail(String email) {
-        driver.findElement(emailID).sendKeys(email);
-    }
-    public void enterPassword(String pswd) {
-        driver.findElement(password).sendKeys(pswd);
-    }
-    public void clickSubmit() {
+        driver.findElement(city).sendKeys(cityName);
+        driver.findElement(state).sendKeys(stateName);
+        driver.findElement(pin).sendKeys(pinNo);
+        driver.findElement(mobile).sendKeys(phone);
+        driver.findElement(email).sendKeys(mail);
+        driver.findElement(password).sendKeys(pass);
         driver.findElement(submitButton).click();
     }
-    public void createCustomer(String name,String dob,String addr,String cityname,String statename,String pinname,String mobile,String email,String pswd) {
-        driver.findElement(newCustomer).click();
-        enterCustomerName(name);
-        selectGender();
-        enterDateofBirth(dob);
-        enterAddress(addr);
-        enterCity(cityname);
-        enterState(statename);
-        enterPin(pinname);
-        enterMobile(mobile);
-        enterEmail(email);
-        enterPassword(pswd);
-        clickSubmit();
+
+    public String getSuccessMessage() {
+        return driver.getPageSource();
+    }
+
+    public String getCustomerId() {
+        String customerText = driver.findElement(By.xpath("//td[text()='Customer ID']/following-sibling::td")).getText();
+        return customerText;
+    }
+
+    public void editCustomerAddress(String custId, String newAddress) {
+        driver.findElement(editCustomerLink).click();
+        driver.findElement(customerId).sendKeys(custId);
+        driver.findElement(submitEdit).click();
+        driver.findElement(editAddress).clear();
+        driver.findElement(editAddress).sendKeys(newAddress);
+        driver.findElement(By.name("sub")).click();
     }
 }

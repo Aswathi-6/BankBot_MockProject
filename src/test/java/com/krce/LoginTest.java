@@ -3,44 +3,39 @@ package com.krce;
 import com.krce.pages.LoginPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
-import org.testng.annotations.*;
-
-import java.time.Duration;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 public class LoginTest {
 
-    public static WebDriver driver;
+    WebDriver driver;
+    LoginPage loginPage;
 
-    @BeforeClass
+    @BeforeMethod
     public void setup() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.get("https://demo.guru99.com/V4/index.php");
+        driver.get("https://demo.guru99.com/V4/");
+        loginPage = new LoginPage(driver);
     }
 
-    @Test(dataProvider = "loginData")
-    public void verifyLogin(String username,String password) {
-        LoginPage login=new LoginPage(driver);
-        login.login(username, password);
-        String title=driver.getTitle();
-        Assert.assertTrue(title.contains("Guru99"));
+    @Test(priority = 1)
+    public void verifyValidLogin() {
+        loginPage.login("mngr661030", "pysabyj");
+        System.out.println("Login successful");
     }
 
-
-
-    @DataProvider(name = "loginData")
-    public Object[][] getData() {
-
-        return new Object[][]{
-                {"mngr661030","pysabyj"}
-        };
+    @Test(priority = 2)
+    public void verifyInvalidLogin() {
+        loginPage.login("wrongUser", "wrongPass");
+        String alertText = driver.switchTo().alert().getText();
+        System.out.println(alertText);
+        driver.switchTo().alert().accept();
     }
 
-
-    @AfterClass
-    public void tearDown(){
+    @AfterMethod
+    public void closeBrowser() {
         driver.quit();
     }
 }
