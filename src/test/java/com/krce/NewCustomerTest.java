@@ -26,7 +26,7 @@ public class NewCustomerTest {
     }
 
 
-    // CREATE NEW CUSTOMER TEST
+    //create new customer test
 
     @Test(priority = 1)
     public void createCustomerTest() {
@@ -50,7 +50,8 @@ public class NewCustomerTest {
         System.out.println("Success message verified");
     }
 
-    // DUPLICATE EMAIL TEST
+
+    //duplicate email test
 
     @Test(priority = 2)
     public void duplicateEmailTest() {
@@ -63,7 +64,6 @@ public class NewCustomerTest {
         driver.findElement(By.name("state")).sendKeys("Tamil Nadu");
         driver.findElement(By.name("pinno")).sendKeys("625104");
         driver.findElement(By.name("telephoneno")).sendKeys("6478239017");
-
         // Use already registered email
         driver.findElement(By.name("emailid")).sendKeys("alreadyused@gmail.com");
         driver.findElement(By.name("password")).sendKeys("siv123");
@@ -80,7 +80,7 @@ public class NewCustomerTest {
     }
 
 
-    // SUCCESS MESSAGE TEST
+    //success message test
 
     @Test(priority = 3)
     public void successMessageTest() {
